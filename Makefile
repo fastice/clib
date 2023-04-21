@@ -1,5 +1,5 @@
 CC =		gcc
-CFLAGS =	$(FLAGS) -D$(MACHTYPE) -c -I$(INCLUDEPATH)
+CFLAGS =	$(FLAGS) -c -I$(INCLUDEPATH)
 
 $(shell mkdir -p $(MACHTYPE)-$(OSTYPE))
 
