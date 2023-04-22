@@ -252,6 +252,7 @@ size_t freadBS(void *ptr, size_t nitems, size_t size, FILE *fp, int32_t flags)
 	size_t retVal;
 	/* Use fread to read the data as requested */
 	retVal = fread(ptr, nitems, size, fp);
+	swap = TRUE; /* Force all to swap for now 4/21/23 */
 #ifdef i386
 	swap = TRUE;
 #endif
@@ -265,7 +266,7 @@ size_t freadBS(void *ptr, size_t nitems, size_t size, FILE *fp, int32_t flags)
 	if (swap == TRUE)
 		byteSwap(ptr, nitems, size, flags);
 	else
-		error("No current noSwap architecture defined  - code needs update\n");
+		/* error("No current noSwap architecture defined  - code needs update\n"); */
 	return retVal;
 }
 /*
@@ -280,7 +281,7 @@ size_t fwriteBS(void *ptr, size_t nitems, size_t size, FILE *fp, int32_t flags)
 	*/
 	if (flags != FLOAT32FLAG && flags != FLOAT64FLAG && flags != INT32FLAG && flags != INT16FLAG && flags != BYTEFLAG)
 		error("fwriteBS: invalid flag");
-	swap = FALSE;
+	swap = TRUE; /* For now force all archetectures to swap*/
 #ifdef i386
 	swap = TRUE;
 #endif
